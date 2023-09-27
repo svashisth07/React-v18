@@ -1,15 +1,15 @@
-import React, { StrictMode, useState } from "react";
-import { createRoot } from "react-dom/client";
-import SearchParams from "./SearchParams";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { StrictMode, Suspense, lazy, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import DetailsErrorBoundary from "./Details";
 import AdoptedPetContext from "./AdoptedPetContect";
+
+const Details = lazy(() => import("./Details"));
+const SearchParams = lazy(() => import("./SearchParams"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
+      suspense: true,
     },
   },
 });
@@ -18,23 +18,27 @@ const App = () => {
   const adoptedPet = useState(false);
   return (
     <StrictMode>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          <AdoptedPetContext.Provider value={adoptedPet}>
+      <QueryClientProvider client={queryClient}>
+        <AdoptedPetContext.Provider value={adoptedPet}>
+          <Suspense
+            fallback={
+              <div className="loading-pane">
+                <h2 className="loader">Loading...</h2>
+              </div>
+            }
+          >
             <header>
               <h1>React 18</h1>
             </header>
             <Routes>
               <Route path="/" element={<SearchParams />} />
-              <Route path="/details/:id" element={<DetailsErrorBoundary />} />
+              <Route path="/details/:id" element={<Details />} />
             </Routes>
-          </AdoptedPetContext.Provider>
-        </QueryClientProvider>
-      </BrowserRouter>
+          </Suspense>
+        </AdoptedPetContext.Provider>
+      </QueryClientProvider>
     </StrictMode>
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(React.createElement(App));
+export default App;

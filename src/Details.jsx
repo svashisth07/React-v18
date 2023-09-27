@@ -7,20 +7,12 @@ import { useContext, useState } from "react";
 import Modal from "./Modal";
 import AdoptedPetContext from "./AdoptedPetContect";
 
-const Details = () => {
+export const Details = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [, setAdoptedPet] = useContext(AdoptedPetContext);
   const [showModal, setShowModal] = useState(false);
-  const { data, isLoading } = useQuery(["details", id], fetchPet);
-
-  if (isLoading) {
-    return (
-      <div className="loading-pane">
-        <h2 className="loader">Loading...</h2>
-      </div>
-    );
-  }
+  const { data } = useQuery(["details", id], fetchPet);
 
   const pet = data?.pets[0];
 

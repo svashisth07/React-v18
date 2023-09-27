@@ -7,10 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "build:client": "vite build --outDir ../dist/client",
+    "build:server": "vite build --outDir ../dist/server --ssr ServerApp.jsx",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
+    "start": "node --experimental-fetch server.js",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/svashisth07/React-v8.git"
@@ -35,6 +39,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.3",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
