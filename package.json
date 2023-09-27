@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "start": "node --experimental-fetch server.js",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest --run",
+    "test:coverage": "vitest --coverage"
   },
   "type": "module",
   "repository": {
@@ -27,15 +28,20 @@
   },
   "homepage": "https://github.com/svashisth07/React-v8#readme",
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@vitejs/plugin-react": "^4.1.0",
+    "@vitest/coverage-v8": "^0.34.5",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "happy-dom": "^12.2.0",
     "prettier": "^3.0.3",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vitest": "^0.34.5",
+    "vitest-fetch-mock": "^0.2.2"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.3",

@@ -19,13 +19,18 @@ class Carousel extends Component {
   render() {
     return (
       <div className="carousel">
-        <img src={this.props.images[this.state.active]} alt="animal" />
+        <img
+          data-testid="hero"
+          src={this.props.images[this.state.active]}
+          alt="animal"
+        />
         <div className="carousel-smaller">
           {this.props.images.map((photo, index) => (
             // eslint-disable-next-line
             <img
               key={photo}
               src={photo}
+              data-testid={`thumbnail${index}`}
               className={index === this.state.active ? "active" : ""}
               alt="animal thumbnail"
               data-index={index}
